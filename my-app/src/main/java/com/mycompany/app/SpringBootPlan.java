@@ -48,12 +48,12 @@ public class SpringBootPlan
         .planRepositories(new GitRepository()
             .url("https://github.com/prathaprk/spring-boot-maven-example-helloworld.git")
             .name("spring-boot-maven-example-helloworld")
-            .authentication(new UserPasswordAuthentication("prathaprk").password("Lenis@2018"))
+            .authentication(new UserPasswordAuthentication("").password(""))
             //.withoutAuthentication()
             .branch("master"))
             .triggers(new RepositoryPollingTrigger()
             .description("Polling")
-            .pollEvery(30, TimeUnit.MINUTES))        
+            .pollEvery(30, TimeUnit.MINUTES))
         .stages(
             new Stage("DEV")
                 .jobs(new Job("Build", "BUILD")
@@ -66,13 +66,13 @@ public class SpringBootPlan
                         .hasTests(false)
                         .version3()
                         .jdk("JDK 1.8")
-                        .executableLabel("Maven 3.6")                                      
+                        .executableLabel("Maven 3.6")
                     )
                     .artifacts(new Artifact("WAR")
                     .location("target")
                     .copyPattern("*.war")
                     )
-                    
+
                 )
         );
   }
